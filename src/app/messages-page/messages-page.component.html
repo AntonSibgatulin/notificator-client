@@ -1,0 +1,68 @@
+<nav>
+  <div class="nav-wrapper">
+    <div class="row">
+      <div class="col s12">
+        <a target="_blank" class="brand-logo">Notificator <span class="hide-on-small-only">Messages</span>
+          <span class="hide-on-small-only" style="font-weight: 100; font-size: 0.4em; opacity:0.5;">
+						v1.0.0
+					</span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-title">
+  <h4>Сообщения</h4>
+  <button routerLink="createMessages" class="waves-effect waves-light btn grey darken-1">Создать сообщение</button>
+</div>
+
+
+<div *ngIf="messages$ | async as messages;">
+
+  <div *ngIf="messages.length!==0">
+
+
+    <a *ngFor="let message of messages">
+
+      <a *ngIf="message.typeMessage == 1">
+        <div routerLink="/message/{{message.id}}" class="message-preview alert card blue lighten-4 blue-text text-darken-3">
+          <div class="card-content">
+            <p><i class="material-icons">info</i><span>Информация:</span> {{message.message}}</p>
+          </div>
+        </div>
+      </a>
+
+
+      <a *ngIf="message.typeMessage == 2">
+        <div routerLink="/message/{{message.id}}" class="message-preview alert card amber lighten-4 brown-text">
+          <div class="card-content">
+            <p><i class="material-icons">report_problem</i><span>Предупреждение:</span>  {{message.message}} </p>
+          </div>
+        </div>
+      </a>
+
+
+      <a *ngIf="message.typeMessage == 3">
+        <div routerLink="/message/{{message.id}}" class="message-preview alert card red lighten-4 red-text text-darken-4">
+          <div class="card-content">
+            <p><i class="material-icons">report</i><span>Внимание:</span>  {{message.message}} </p>
+          </div>
+        </div>
+      </a>
+
+      <a *ngIf="message.typeMessage == 4">
+        <div routerLink="/message/{{message.id}}" class="message-preview alert card green lighten-4 green-text text-darken-4">
+          <div class="card-content">
+            <p><i class="material-icons">check_circle</i><span>Уведомление:</span>  {{message.message}} </p>
+          </div>
+        </div>
+      </a>
+
+
+    </a>
+
+  </div>
+
+</div>

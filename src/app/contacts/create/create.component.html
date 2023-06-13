@@ -1,0 +1,46 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="card">
+  <div class="card-content">
+    <span class="card-title">Создать контакт</span>
+    <div class="input-field">
+      <input formControlName="phone" id="phone" type="number" required>
+      <label for="phone">Телефон:</label>
+    </div>
+
+    <div class="input-field">
+      <input  formControlName="email" id="email" type="email" required>
+      <label for="email">Email:</label>
+    </div>
+
+    <div class="input-field">
+      <input  formControlName="name" id="name" type="text" required>
+      <label for="name">Имя:</label>
+    </div>
+
+    <div class="input-field">
+      <div class="form_radio_group">
+        <div class="form_radio_group-item">
+          <input id="radio-1" type="checkbox" name="vk" value="true" >
+          <label for="radio-1">ВКонтакте</label>
+        </div>
+        <div class="form_radio_group-item">
+          <input id="radio-2" type="checkbox" name="tg" value="true">
+          <label for="radio-2">Telegram</label>
+        </div>
+        <div class="form_radio_group-item">
+          <input id="radio-3" type="checkbox" name="ws" value="true">
+          <label for="radio-3">Whatsapp</label>
+        </div>
+        <div class="form_radio_group-item">
+          <input id="radio-4" type="checkbox" name="relative" value="true" >
+          <label for="radio-4">Родственник</label>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="card-action">
+    <button type="submit" (submit)="onSubmit()" class="modal-action btn waves-effect" [disabled]="form.invalid || form.disabled">Создать</button>
+
+  </div>
+</form>

@@ -1,0 +1,16 @@
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="card">
+  <div class="card-content">
+    <span class="card-title">Подтверждение телефона</span>
+    <div class="input-field">
+      <input  formControlName="code" id="code" type="number" required>
+      <label for="code">Код из смс:</label>
+    </div>
+
+
+  </div>
+  <div class="card-action">
+    <button type="submit" class="modal-action btn waves-effect" [disabled]="form.invalid || form.disabled">Войти</button>
+
+  </div>
+</form>

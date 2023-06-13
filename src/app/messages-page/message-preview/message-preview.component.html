@@ -1,0 +1,82 @@
+<div *ngIf="messages$ | async as message;">
+
+  <div class="page-title">
+    <button routerLink="/message/edit/{{message.id}}"  class="waves-effect waves-light btn green darken-1">Редактировать сообщение
+    </button>
+    <button routerLink="createMessages" class="waves-effect waves-light btn red darken-1"
+            (click)="deleteOne(message.id)">Удалить сообщение
+    </button>
+  </div>
+
+  <div>
+
+    <a *ngIf="message.typeMessage == 1">
+      <div class="message-preview alert card blue lighten-4 blue-text text-darken-3">
+        <div class="card-content">
+          <p><i class="material-icons">info</i><span>Информация:</span> {{message.message}}</p>
+        </div>
+      </div>
+    </a>
+
+
+    <a *ngIf="message.typeMessage == 2">
+      <div class="message-preview alert card amber lighten-4 brown-text">
+        <div class="card-content">
+          <p><i class="material-icons">report_problem</i><span>Предупреждение:</span>  {{message.message}} </p>
+        </div>
+      </div>
+    </a>
+
+
+    <a *ngIf="message.typeMessage == 3">
+      <div class="message-preview alert card red lighten-4 red-text text-darken-4">
+        <div class="card-content">
+          <p><i class="material-icons">report</i><span>Внимание:</span>  {{message.message}} </p>
+        </div>
+      </div>
+    </a>
+
+    <a *ngIf="message.typeMessage == 4">
+      <div class="message-preview alert card green lighten-4 green-text text-darken-4">
+        <div class="card-content">
+          <p><i class="material-icons">check_circle</i><span>Уведомление:</span>  {{message.message}} </p>
+        </div>
+      </div>
+    </a>
+
+    <button type="submit" style="width: 100%" (click)="mailing()" class="waves-effect waves-light btn blue darken-1">
+      Разослать
+    </button>
+
+    <div class="col s12">
+      <div class="collection" *ngIf="message.contacts.length!==0">
+
+
+        <a *ngFor="let contact of message.contacts" class="collection-item">
+          <div class="contact-preview">
+
+            <div class="element">
+              {{contact.name}}
+            </div>
+            <div class="element">
+              {{contact.phone}}
+            </div>
+
+            <div class="element">
+              {{getRelative(contact)}}
+            </div>
+            <div class="element">
+              {{getSocialNetwork(contact)}}
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>
+

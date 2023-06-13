@@ -1,0 +1,69 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="card" *ngIf="message$ | async as message">
+  <div class="card-content">
+    <span class="card-title">Создать контакт</span>
+    <div class="input-field">
+      <textarea formControlName="message" [(ngModel)]="message.message" style="height: 400px;border: 1px solid #e3d9d9;border-radius: 4px;padding: 10px;"   [maxLength]="4096"  class="materialize-textarea" required >dsf</textarea>
+    </div>
+
+
+    <div class="form_radio_btn">
+      <input (change)="onChangeType($event)" id="radio-1" type="radio" name="type" value="1" [checked]="message.typeMessage==1" >
+      <label for="radio-1">Информация</label>
+    </div>
+
+    <div class="form_radio_btn">
+      <input  (change)="onChangeType($event)" id="radio-2" type="radio" name="type" value="2" [checked]="message.typeMessage==2">
+      <label for="radio-2">Предупреждение</label>
+    </div>
+
+    <div class="form_radio_btn">
+      <input (change)="onChangeType($event)" id="radio-3" type="radio" name="type" value="3" [checked]="message.typeMessage==3">
+      <label for="radio-3">Опасность</label>
+    </div>
+
+    <div  class="form_radio_btn">
+      <input (change)="onChangeType($event)"  id="radio-4" type="radio" name="type" value="4" [checked]="message.typeMessage==4">
+      <label for="radio-4">Уведомление</label>
+    </div>
+
+
+
+    <div class="row"  *ngIf="contacts$ | async as contacts;" style="margin-top: 10px;">
+      <div class="col s12">
+        <div class="collection" *ngIf="contacts.length!==0">
+
+
+          <a *ngFor="let contact of contacts" class="collection-item">
+            <div class="contact-preview">
+              <div class="element" style="width: 64px;">
+                <input type="checkbox" class="custom-checkbox"  (change)="onCheckChange($event)" name="delete" id = "{{contact.id}}" value ="{{contact.id}}" [checked]="isChecked(message.contacts,contact)">
+                <label for="{{contact.id}}"></label>
+              </div>
+              <div class="element">
+                {{contact.name}}
+              </div>
+              <div class="element">
+                {{contact.phone}}
+              </div>
+              <div class="element">
+                {{getRelative(contact)}}
+              </div>
+              <div class="element">
+                {{getSocialNetwork(contact)}}
+              </div>
+
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-action">
+    <button type="submit" (submit)="onSubmit()" class="modal-action btn waves-effect"
+            [disabled]="form.invalid || form.disabled">Сохранить
+    </button>
+
+  </div>
+</form>

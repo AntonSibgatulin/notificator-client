@@ -1,0 +1,40 @@
+<div class="page-title">
+  <h4>Контакты</h4>
+  <button routerLink="/contactCreate" class="waves-effect waves-light btn grey darken-1">Добавить контакт</button>
+</div>
+<form>
+<div class="row"  *ngIf="contacts$ | async as contacts;">
+  <div class="col s12">
+    <div class="collection" *ngIf="contacts.length!==0">
+
+
+      <a *ngFor="let contact of contacts" class="collection-item">
+        <div class="contact-preview">
+          <div class="element" style="width: 64px;">
+            <input type="checkbox" class="custom-checkbox"  (change)="onCheckChange($event)" name="delete" id = "{{contact.id}}" value ="{{contact.id}}">
+            <label for="{{contact.id}}"></label>
+          </div>
+          <div class="element">
+            {{contact.name}}
+          </div>
+          <div class="element">
+            {{contact.phone}}
+          </div>
+          <div class="element">
+            {{getRelative(contact)}}
+          </div>
+          <div class="element">
+            {{getSocialNetwork(contact)}}
+          </div>
+
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+  <div class="page-title">
+  <button (click)="delete()" type="submit" class="waves-effect waves-light btn red darken-1">Удалить</button>
+  </div>
+</form>

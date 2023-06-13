@@ -1,0 +1,83 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="card">
+  <div class="card-content">
+    <span class="card-title">Создать крон задачу</span>
+    <div class="input-field" style="margin-top: 30px">
+      <input maxlength="255" formControlName="http_url" id="http_url" type="text" required>
+      <label for="http_url">HTTP URL:</label>
+    </div>
+    <div class="input-field">
+      <input maxlength="255" formControlName="http_code" id="http_code" type="number" required>
+      <label for="http_code">HTTP CODE SUCCESSFULLY:</label>
+    </div>
+    <div class="input-field">
+      <span class="card-title">MESSAGE TEXT</span>
+      <textarea maxlength="255" formControlName="message"
+                style="height: 400px;border: 1px solid #e3d9d9;border-radius: 4px;padding: 10px;"
+                class="materialize-textarea"></textarea>
+    </div>
+
+    <div class="input-field row">
+      <span class="helper-text black-text">TYPE</span>
+      <div class="form_radio_btn">
+        <input (change)="onChangeType($event)" id="radio-1" type="radio" name="cronType" value="MINUTES_5">
+        <label for="radio-1">MINUTES_5</label>
+      </div>
+
+      <div class="form_radio_btn">
+        <input (change)="onChangeType($event)" id="radio-2" type="radio" name="cronType" value="MINUTES_15">
+        <label for="radio-2">MINUTES_15</label>
+      </div>
+
+      <div class="form_radio_btn">
+        <input (change)="onChangeType($event)" id="radio-3" type="radio" name="cronType" value="MINUTES_30">
+        <label for="radio-3">MINUTES_30</label>
+      </div>
+
+      <div class="form_radio_btn">
+        <input (change)="onChangeType($event)" id="radio-4" type="radio" name="cronType" value="HOUR" checked>
+        <label for="radio-4">HOUR</label>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row" *ngIf="contacts$ | async as contacts;" style="margin-top: 10px;">
+    <div class="col s12">
+      <div class="collection" *ngIf="contacts.length!==0">
+
+
+        <a *ngFor="let contact of contacts" class="collection-item">
+          <div class="contact-preview">
+            <div class="element" style="width: 64px;">
+              <input type="checkbox" class="custom-checkbox" (change)="onCheckChange($event)" name="delete"
+                     id="{{contact.id}}" value="{{contact.id}}">
+              <label for="{{contact.id}}"></label>
+            </div>
+            <div class="element">
+              {{contact.name}}
+            </div>
+            <div class="element">
+              {{contact.phone}}
+            </div>
+            <div class="element">
+              {{getRelative(contact)}}
+            </div>
+            <div class="element">
+              {{getSocialNetwork(contact)}}
+            </div>
+
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card-action">
+    <button type="submit" class="modal-action btn waves-effect" [disabled]="form.invalid || form.disabled">Создать
+    </button>
+
+  </div>
+
+</form>
